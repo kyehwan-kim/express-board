@@ -17,11 +17,13 @@ app.use(express.urlencoded({ extended: false }));
 const mainRouter = require('./routes');
 const userRouter = require('./routes/users');
 const boardRouter = require('./routes/board');
+const dbRouter = require('./routes/db');
 
 // 서버 설정 부분
 app.use('/', mainRouter);
 app.use('/users', userRouter);
 app.use('/board', boardRouter);
+app.use('/db', dbRouter);
 // app.use(express.static('public'));
 
 app.use((err, req, res, next) => {
