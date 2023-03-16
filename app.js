@@ -1,6 +1,7 @@
 // 전체 패키지 부분
 const express = require('express');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 
 // 서버에서 매우 중요한 것들을 선언하는 파트
 const app = express();
@@ -13,17 +14,22 @@ app.set('view engine', 'ejs');
 // body-parser를 위한 코드 2개
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 
 const mainRouter = require('./routes');
 const userRouter = require('./routes/users');
 const boardRouter = require('./routes/board');
 const dbRouter = require('./routes/db');
+const dbBoardRouter = require('./routes/dbBoard');
+const cookieRouter = require('./routes/cookie');
 
 // 서버 설정 부분
 app.use('/', mainRouter);
 app.use('/users', userRouter);
 app.use('/board', boardRouter);
 app.use('/db', dbRouter);
+app.use('/dbBoard', dbBoardRouter);
+app.use('/cookie', cookieRouter);
 // app.use(express.static('public'));
 
 app.use((err, req, res, next) => {
