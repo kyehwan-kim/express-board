@@ -19,9 +19,8 @@ router.get('/cook', (req, res) => {
   // 쿠키 발행 코드 작성하기!
   res.cookie('cook', true, {
     maxAge: 1000 * 5,
-    httpOnly: false,
   });
-  res.send('쿠키 굽기 성공');
+  res.status(200).json('쿠키 굽기 성공');
 });
 
 module.exports = router;
