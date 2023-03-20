@@ -3,10 +3,11 @@ const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+require('dotenv').config();
 
 // 서버에서 매우 중요한 것들을 선언하는 파트
 const app = express();
-const PORT = 4000;
+const { PORT } = process.env;
 
 // router 코드들
 app.use(cors());
@@ -16,7 +17,7 @@ app.set('view engine', 'ejs');
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use(cookieParser());
+app.use(cookieParser('hwan'));
 app.use(
   session({
     secret: 'tetz',
