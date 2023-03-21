@@ -26,7 +26,7 @@ const hwan = {
   ...hwanInfo,
 };
 
-// console.log(hwan);
+console.log(hwan);
 
 const arr1 = [1, 2, 3];
 const arr2 = ['4', '5', '6'];
@@ -43,11 +43,11 @@ const hwan2 = {
 };
 
 const { name, ...restInfo } = hwan2;
-// console.log(name, restInfo);
+console.log(name, restInfo);
 
 const arr3 = [1, 2, 3, 4, 5, 6, 7];
 const [first, ...rest] = arr3;
-// console.log(first, rest);
+console.log(first, rest);
 
 function spread(first, second, ...rest) {
   console.log(first);
