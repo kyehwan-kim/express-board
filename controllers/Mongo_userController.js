@@ -1,6 +1,4 @@
-// const 변수가 없어도 이미 mongooseConnect 가 실행되고 있으므로 require로 불러들이기만 해도 서버 접속 가능.
-require('./mongooseConnect');
-const User = require('../models/user');
+const mongoClient = require('./mongoConnect');
 
 // 메세지를 변수로 지정하여 코드를 더 깔끔하게 보여줌
 // 회원가입 변수
@@ -22,10 +20,13 @@ const LOGIN_WRONG_PASSWORD_MSG =
 // 회원가입
 const registerUser = async (req, res) => {
   try {
-    // const duplicatedUser = await User.findOne({ id: req.body.id });
-    // if (duplicatedUser) return res.status(400).send(DUPLICATED_MSG);
+    const client = await mongoClient.connect();
+    const user = client.db('kdt5').collection('user');
 
-    await User.create(req.body);
+    const duplicatedUser = await user.findOne({ id: req.body.id });
+    if (duplicatedUser) return res.status(400).send(DUPLICATED_MSG);
+
+    await user.insertOne(req.body);
     res.status(200).send(SUCCESS_MSG);
   } catch (err) {
     console.error(err);
@@ -36,7 +37,10 @@ const registerUser = async (req, res) => {
 // 로그인
 const loginUser = async (req, res) => {
   try {
-    const findUser = await User.findOne({ id: req.body.id });
+    const client = await mongoClient.connect();
+    const user = client.db('kdt5').collection('user');
+
+    const findUser = await user.findOne({ id: req.body.id });
     if (!findUser) return res.status(400).send(LOGIN_NOT_REGISTERED_MSG);
 
     if (findUser.password !== req.body.password)

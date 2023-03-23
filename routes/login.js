@@ -44,12 +44,12 @@ router.post('/', loginUser);
 // });
 
 // // 로그아웃파트
-// router.get('/logout', (req, res) => {
-//   req.session.destroy((err) => {
-//     if (err) throw err;
-//     res.clearCookie('user');
-//     res.redirect('/');
-//   });
-// });
+router.get('/logout', (req, res) => {
+  req.session.destroy((err) => {
+    if (err) throw err;
+    res.clearCookie('user');
+    res.redirect('/');
+  });
+});
 
 module.exports = router;
