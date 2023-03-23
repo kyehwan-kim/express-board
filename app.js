@@ -39,6 +39,8 @@ const registerRouter = require('./routes/register');
 const loginRouter = require('./routes/login');
 
 // 서버 설정 부분
+app.use(express.static('public'));
+app.use('/uploads', express.static('uploads'));
 app.use('/', mainRouter);
 app.use('/users', userRouter);
 app.use('/board', boardRouter);
@@ -47,7 +49,6 @@ app.use('/dbBoard', dbBoardRouter);
 app.use('/cookie', cookieRouter);
 app.use('/register', registerRouter);
 app.use('/login', loginRouter);
-// app.use(express.static('public'));
 
 app.use((err, req, res, next) => {
   console.log(err.stack);
